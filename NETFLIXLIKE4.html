@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anvesha Rohatgi - Portfolio</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0f0f0f;
+        color: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      .netflix-gradient {
+        background: linear-gradient(
+          135deg,
+          #141414 0%,
+          #1a1a1a 50%,
+          #222222 100%
+        );
+      }
+      .project-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        flex: 0 0 auto;
+      }
+      .project-card:hover {
+        transform: scale(1.05);
+        z-index: 10;
+      }
+      .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 20px 0;
+        gap: 20px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+      .scroll-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .scroll-wrapper:hover .scroll-arrow {
+        opacity: 1;
+      }
+      .scroll-arrow:hover {
+        background: rgba(229, 9, 20, 0.9);
+      }
+      .nav-gradient {
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+      .section-title {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+      .section-title::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: #e50914;
+        border-radius: 2px;
+      }
+      .tech-stack-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      .tech-stack-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(229, 9, 20, 0.3);
+        background: rgba(229, 9, 20, 0.05);
+      }
+      .skill-category {
+        background: linear-gradient(
+          135deg,
+          rgba(229, 9, 20, 0.1),
+          rgba(147, 51, 234, 0.1)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .category-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #e50914, #9333ea);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .recent-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .recent-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #e50914, #9333ea);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+      }
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .profile-dropdown {
+        animation: dropdownSlide 0.3s ease;
+        transform-origin: top right;
+      }
+      .about-modal {
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes dropdownSlide {
+        from {
+          opacity: 0;
+          transform: translateY(-10px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .footer-gradient {
+        background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+        border-top: 1px solid #333;
+      }
+      .footer-link {
+        position: relative;
+        padding-bottom: 2px;
+      }
+      .footer-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #e50914;
+        transition: width 0.3s ease;
+      }
+      .footer-link:hover::after {
+        width: 100%;
+      }
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #e50914;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 100;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+      .back-to-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .back-to-top:hover {
+        background: #f6121d;
+        transform: translateY(-5px);
+      }
+      .book-call-btn {
+        background: linear-gradient(135deg, #9333ea, #4f46e5);
+        transition: all 0.3s ease;
+      }
+      .book-call-btn:hover {
+        background: linear-gradient(135deg, #7c3aed, #4338ca);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+      }
+      .profile-btn {
+        background: linear-gradient(135deg, #9333ea, #4f46e5);
+        transition: all 0.3s ease;
+      }
+      .profile-btn:hover {
+        background: linear-gradient(135deg, #7c3aed, #4338ca);
+        transform: translateY(-2px);
+      }
+      .gradient-border {
+        position: relative;
+        background: linear-gradient(#141414, #141414) padding-box,
+          linear-gradient(135deg, #9333ea, #4f46e5) border-box;
+        border: 1px solid transparent;
+      }
+      .timeline-item {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 2rem;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #9333ea, #4f46e5);
+      }
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 1.5rem;
+        width: 2px;
+        height: calc(100% + 1rem);
+        background: rgba(147, 51, 234, 0.3);
+      }
+      .timeline-item:last-child::after {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="netflix-gradient min-h-screen">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-6 py-4 nav-gradient flex justify-between items-center"
+    >
+      <div class="flex items-center space-x-8">
+        <div
+          class="flex items-center space-x-2 cursor-pointer"
+          onclick="scrollToTop()"
+        >
+          <div class="h-8 w-2 bg-[#9333ea] rounded-full"></div>
+          <div class="h-8 w-2 bg-[#9333ea] rounded-full opacity-60"></div>
+          <div class="h-8 w-2 bg-[#9333ea] rounded-full opacity-40"></div>
+          <span class="ml-2 text-xl font-bold">ANVESHA</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+          <a
+            href="#home"
+            class="text-white hover:text-gray-300 transition-colors"
+            >Home</a
+          >
+          <a
+            href="#ongoing"
+            class="text-white hover:text-gray-300 transition-colors"
+            >Ongoing</a
+          >
+          <a
+            href="#tech-stack"
+            class="text-white hover:text-gray-300 transition-colors"
+            >Tech Stack</a
+          >
+          <a
+            href="#recent"
+            class="text-white hover:text-gray-300 transition-colors"
+            >Recent</a
+          >
+          <a
+            href="#recommended"
+            class="text-white hover:text-gray-300 transition-colors"
+            >Recommended</a
+          >
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="flex items-center space-x-3">
+        <!-- Book a Call Button -->
+        <a
+          href="https://calendar.app.google/J3CBnvMSPVjoDnNR8"
+          target="_blank"
+          class="book-call-btn text-white px-4 py-2 rounded-lg font-semibold flex items-center space-x-2 transition-all duration-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-calendar"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+          </svg>
+          <span class="hidden sm:inline">Book a Call</span>
+        </a>
+
+        <!-- Profile Button -->
+        <button
+          onclick="openAboutModal()"
+          class="profile-btn text-white px-4 py-2 rounded-lg font-semibold flex items-center space-x-2 transition-all duration-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-user"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>About Me</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- About Me Modal -->
+    <div id="aboutModal" class="modal">
+      <div
+        class="bg-[#1a1a1a] rounded-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto about-modal"
+      >
+        <div class="p-8">
+          <div class="flex justify-between items-start mb-8">
+            <div class="flex items-center space-x-4">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-2xl font-bold text-white">A</span>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold">Hi, I'm Anvesha 👋</h2>
+                <p class="text-gray-400">
+                  annierohatgi13@gmail.com | +91 8839520003 <br>github.com/Anvesha137 | linkedin.com/in/anvesha-rohatgi/
+                 
+                </p>
+              </div>
+            </div>
+            <button
+              onclick="closeAboutModal()"
+              class="text-gray-400 hover:text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-x"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="space-y-8">
+            <!-- Introduction -->
+            <div class="gradient-border rounded-xl p-6">
+              <p class="text-gray-300 leading-relaxed">
+                I'm a final-year engineering student who genuinely enjoys
+                building things that
+                <span class="text-purple-400 font-semibold">actually work</span>
+                — mostly around AI, automation, and applied machine learning.
+              </p>
+              <p class="text-gray-300 leading-relaxed mt-4">
+                I don't come from the "topper" or "one-stack-for-life" mindset.
+                I learn by doing, breaking, fixing, and repeating. Somewhere
+                between college labs and late-night experiments, I realized I
+                cared less about grades and more about whether something could
+                survive real-world use.
+              </p>
+            </div>
+
+            <!-- Journey Timeline -->
+            <div class="gradient-border rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-6 flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-map mr-2"
+                >
+                  <path
+                    d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"
+                  />
+                </svg>
+                My Journey
+              </h3>
+
+              <div class="space-y-8">
+                <!-- First Year -->
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold text-purple-300">
+                    First Year: The Awkward Beginning
+                  </h4>
+                  <p class="text-gray-400 mt-2">
+                    Like most first-year students, I started college doing
+                    exactly what I was told. Attend lectures. Submit
+                    assignments. Pass exams.
+                  </p>
+                  <p class="text-gray-400 mt-2">
+                    It didn't take long to notice the gap. I could answer
+                    questions, but I couldn't confidently
+                    <span class="text-white">build</span> anything end-to-end.
+                    That bothered me more than bad grades ever could.
+                  </p>
+                </div>
+
+                <!-- Kaushal 4.0 -->
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold text-purple-300">
+                    Kaushal 4.0: When Things Clicked
+                  </h4>
+                  <p class="text-gray-400 mt-2">
+                    Kaushal 4.0 was my first real wake-up call. For the first
+                    time, learning wasn't about finishing a module — it was
+                    about solving something practical. Suddenly, concepts had
+                    context.
+                  </p>
+                  <div
+                    class="mt-3 p-4 bg-purple-900/20 rounded-lg border border-purple-800/30"
+                  >
+                    <p class="text-purple-300 text-sm font-semibold">
+                      Rule I still follow:
+                    </p>
+                    <p class="text-white mt-1">
+                      If you can't apply it, you don't really understand it.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Second Year -->
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold text-purple-300">
+                    Second Year: From Curious to Capable
+                  </h4>
+                  <p class="text-gray-400 mt-2">
+                    By second year, my mindset shifted. Instead of asking "What
+                    should I study next?" I started asking "What can I build
+                    with what I already know?"
+                  </p>
+                  <p class="text-gray-400 mt-2">
+                    This is when I went deeper into machine learning
+                    fundamentals, neural networks, CNNs, data handling, and
+                    evaluation — not just academically, but practically.
+                  </p>
+                </div>
+
+                <!-- Third Year -->
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold text-purple-300">
+                    Third Year: Thinking Beyond Models
+                  </h4>
+                  <p class="text-gray-400 mt-2">
+                    At some point, individual models stopped exciting me.
+                    Systems did. How does data move from input to output? How do
+                    automations behave when something unexpected happens?
+                  </p>
+                  <div
+                    class="mt-3 p-4 bg-blue-900/20 rounded-lg border border-blue-800/30"
+                  >
+                    <p class="text-blue-300 text-sm font-semibold">
+                      Important realization:
+                    </p>
+                    <p class="text-white mt-1">
+                      Most problems don't need fancy AI. They need reliable
+                      pipelines and clear logic.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Final Year -->
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold text-purple-300">
+                    Final Year: Building Real, Usable Things
+                  </h4>
+                  <p class="text-gray-400 mt-2">
+                    Final year is where everything came together. I stopped
+                    building "projects" and started building
+                    <span class="text-white font-semibold">solutions</span>.
+                  </p>
+                  <p class="text-gray-400 mt-2">
+                    I now care less about how impressive something sounds and
+                    more about:
+                  </p>
+                  <ul class="list-disc pl-5 text-gray-400 mt-2 space-y-1">
+                    <li>Does it solve a real problem?</li>
+                    <li>Will it survive messy inputs?</li>
+                    <li>Can someone else use it confidently?</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Philosophy Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- AI Philosophy -->
+              <div class="gradient-border rounded-xl p-6">
+                <h4 class="text-lg font-semibold text-purple-300 mb-4">
+                  How I Think About AI (No Hype Edition)
+                </h4>
+                <p class="text-gray-400">
+                  I like AI, but I don't romanticize it. Sometimes rules beat
+                  models. Sometimes automation beats prediction. Sometimes the
+                  smartest decision is <span class="italic">not</span> using AI
+                  at all.
+                </p>
+                <div class="mt-4 p-3 bg-gray-800/50 rounded-lg">
+                  <p class="text-sm text-gray-300">
+                    <span class="font-semibold"
+                      >That's why I'm comfortable calling myself a
+                      generalist.</span
+                    >
+                    It helps me zoom out, connect dots, and avoid building
+                    cool-but-useless things.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Optimizing For -->
+              <div class="gradient-border rounded-xl p-6">
+                <h4 class="text-lg font-semibold text-purple-300 mb-4">
+                  What I'm Optimizing For
+                </h4>
+                <p class="text-gray-400 mb-3">
+                  Not buzzwords. Not certificates. Not surface-level polish.
+                </p>
+                <ul class="space-y-2">
+                  <li class="flex items-center text-gray-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-check-circle mr-2 text-green-400"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <path d="m9 11 3 3L22 4" />
+                    </svg>
+                    End-to-end ownership
+                  </li>
+                  <li class="flex items-center text-gray-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-check-circle mr-2 text-green-400"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <path d="m9 11 3 3L22 4" />
+                    </svg>
+                    Strong fundamentals
+                  </li>
+                  <li class="flex items-center text-gray-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-check-circle mr-2 text-green-400"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <path d="m9 11 3 3L22 4" />
+                    </svg>
+                    Clear thinking under constraints
+                  </li>
+                  <li class="flex items-center text-gray-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-check-circle mr-2 text-green-400"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <path d="m9 11 3 3L22 4" />
+                    </svg>
+                    Shipping → learning → iterating
+                  </li>
+                </ul>
+                <p class="text-gray-400 mt-4 text-sm italic">
+                  I'd rather build something imperfect and useful than something
+                  elegant and irrelevant.
+                </p>
+              </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div
+              class="gradient-border rounded-xl p-6 bg-gradient-to-r from-purple-900/20 to-blue-900/20"
+            >
+              <h4 class="text-xl font-bold mb-4">What's Next</h4>
+              <p class="text-gray-300 mb-6">
+                I'm actively building and exploring opportunities around
+                <span class="text-white font-semibold"
+                  >AI engineering, automation, and applied ML</span
+                >
+                — roles where thinking matters more than memorization.
+              </p>
+              <p class="text-gray-300 mb-6">
+                If you want to exchange ideas, talk systems, automation, or
+                sanity-check something you're building, feel free to book a
+                call.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://calendar.app.google/J3CBnvMSPVjoDnNR8"
+                  target="_blank"
+                  class="book-call-btn text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-calendar mr-2"
+                  >
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" />
+                  </svg>
+                  Book a Call
+                </a>
+                <button
+                  onclick="closeAboutModal()"
+                  class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  Continue Exploring Portfolio
+                </button>
+              </div>
+            </div>
+
+            <!-- Closing -->
+            <div class="text-center pt-6 border-t border-gray-800">
+              <p class="text-gray-400">
+                This page will evolve as I do — and that's intentional.
+              </p>
+              <p class="text-purple-300 font-semibold mt-2">
+                If you made it this far, welcome. You're exactly the kind of
+                person I enjoy working with 🚀
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div id="backToTop" class="back-to-top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-chevron-up"
+      >
+        <path d="m18 15-6-6-6 6" />
+      </svg>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-1 px-6 md:px-12 relative">
+      <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center">
+        <!-- Text Content -->
+        <div class="lg:w-1/2 lg:pr-12">
+          <div class="mb-8">
+            <span 
+              class="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-[#9333ea]/20 to-[#4f46e5]/20 text-[#9333ea] text-sm font-semibold"
+            >
+              <span
+                class="w-2 h-2 bg-[#9333ea] rounded-full mr-2 animate-pulse"
+              ></span>
+              Available for Internship 
+            </span>
+          </div>
+
+          <h1 class="text-5xl md:text-7xl font-bold mb-6">
+            <span class="block">ANVESHA</span>
+            <span
+              class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500"
+              >ROHATGI</span
+            >
+          </h1>
+
+          <p class="text-xl text-gray-300 mb-8 max-w-2xl">
+            Building intelligent systems at the intersection of
+            <span class="text-white font-semibold">AI/ML</span> and
+            <span class="text-white font-semibold">Full Stack Development</span>.
+            Creating scalable solutions that bridge innovation with practical
+            application.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-12">
+            <div
+              class="bg-[#1a1a1a] rounded-lg p-4 border border-[#333] hover:border-[#444] transition-colors"
+            >
+              <p class="text-2xl font-bold">5+</p>
+              <p class="text-gray-400 text-sm">Projects</p>
+            </div>
+            <div
+              class="bg-[#1a1a1a] rounded-lg p-4 border border-[#333] hover:border-[#444] transition-colors"
+            >
+              <p class="text-2xl font-bold">8.5</p>
+              <p class="text-gray-400 text-sm">CGPA</p>
+            </div>
+            <div
+              class="bg-[#1a1a1a] rounded-lg p-4 border border-[#333] hover:border-[#444] transition-colors"
+            >
+              <p class="text-2xl font-bold">3</p>
+              <p class="text-gray-400 text-sm">Certifications</p>
+            </div>
+            <div
+              class="bg-[#1a1a1a] rounded-lg p-4 border border-[#333] hover:border-[#444] transition-colors"
+            >
+              <p class="text-2xl font-bold">100%</p>
+              <p class="text-gray-400 text-sm">Passion</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4">
+            <button
+              onclick="scrollToSection('ongoing')"
+              class="bg-gradient-to-r from-[#9333ea] to-[#4f46e5] hover:from-[#7c3aed] hover:to-[#4338ca] text-white px-8 py-3 rounded font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl"
+            >
+              View Projects
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-right ml-2"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+            <button
+              onclick="openAboutModal()"
+              class="bg-transparent border border-gray-600 hover:border-gray-400 text-white px-8 py-3 rounded font-semibold transition-colors hover:bg-white/5"
+            >
+              Read My Story
+            </button>
+            <a
+              href="https://calendar.app.google/J3CBnvMSPVjoDnNR8"
+              target="_blank"
+              class="book-call-btn text-white px-8 py-3 rounded font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-calendar mr-2"
+              >
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M3 10h18" />
+              </svg>
+              Book a Call
+            </a>
+          </div>
+        </div>
+        
+        <!-- K5 Image Column -->
+        <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center">
+          <img src="K5.png" alt="K5" class="w-full max-w-lg h-auto object-contain">
+        </div>
+      </div>
+    </section>
+
+    <!-- Ongoing Projects Section -->
+    <section id="ongoing" class="px-6 md:px-12 mt-20">
+      <div class="mb-8 flex justify-between items-center">
+        <div>
+          <h2 class="section-title text-2xl font-bold">Ongoing Projects</h2>
+          <p class="text-gray-400 ml-6">
+            Currently working on these exciting projects
+          </p>
+        </div>
+        <div class="flex space-x-2">
+          <button onclick="scrollOngoing(-1)" class="scroll-arrow left-arrow">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-left"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <button onclick="scrollOngoing(1)" class="scroll-arrow right-arrow">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-right"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="scroll-wrapper relative">
+        <div id="ongoingScroll" class="scroll-container">
+          <!-- Project 1: Smart Sales Insights -->
+          <div class="project-card w-80">
+            <div
+              class="bg-[#1a1a1a] rounded-xl overflow-hidden border border-[#333] h-full hover:border-[#444] transition-colors"
+            >
+              <div
+                class="relative h-48 bg-gradient-to-br from-pink-900/40 to-pink-600/20"
+              >
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-bar-chart text-pink-500 opacity-50"
+                  >
+                    <path d="M12 20V10" />
+                    <path d="M18 20V4" />
+                    <path d="M6 20v-4" />
+                  </svg>
+                </div>
+                <div class="absolute bottom-4 left-4">
+                  <span
+                    class="bg-gradient-to-r from-[#9333ea] to-[#4f46e5] text-white px-3 py-1 rounded-full text-xs font-semibold"
+                    >In Progress</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="px-3 py-1 bg-pink-900/30 text-pink-300 rounded-full text-xs"
+                    >Python</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-pink-900/30 text-pink-300 rounded-full text-xs"
+                    >XGBoost</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-pink-900/30 text-pink-300 rounded-full text-xs"
+                    >Streamlit</span
+                  >
+                </div>
+                <h3 class="text-xl font-bold mb-2">Smart Sales Insights</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                  AI-powered analytics platform with automated forecasting and
+                  insights generation
+                </p>
+
+                <div class="mb-4">
+                  <div class="flex justify-between text-xs text-gray-500 mb-1">
+                    <span>Progress</span>
+                    <span>75%</span>
+                  </div>
+                  <div
+                    class="w-full h-2 bg-gray-800 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-pink-600 to-pink-400"
+                      style="width: 75%"
+                    ></div>
+                  </div>
+                </div>
+
+                <button
+                  onclick="viewProject('smart-sales')"
+                  class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded text-sm font-semibold transition-colors"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Smart Inventory Auditor -->
+          <div class="project-card w-80">
+            <div
+              class="bg-[#1a1a1a] rounded-xl overflow-hidden border border-[#333] h-full hover:border-[#444] transition-colors"
+            >
+              <div
+                class="relative h-48 bg-gradient-to-br from-orange-900/40 to-orange-600/20"
+              >
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-camera text-orange-500 opacity-50"
+                  >
+                    <path
+                      d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+                    />
+                    <circle cx="12" cy="13" r="3" />
+                  </svg>
+                </div>
+                <div class="absolute bottom-4 left-4">
+                  <span
+                    class="bg-gradient-to-r from-[#9333ea] to-[#4f46e5] text-white px-3 py-1 rounded-full text-xs font-semibold"
+                    >In Progress</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="px-3 py-1 bg-orange-900/30 text-orange-300 rounded-full text-xs"
+                    >YOLOv8</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-orange-900/30 text-orange-300 rounded-full text-xs"
+                    >OpenCV</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-orange-900/30 text-orange-300 rounded-full text-xs"
+                    >Streamlit</span
+                  >
+                </div>
+                <h3 class="text-xl font-bold mb-2">Smart Inventory Auditor</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                  Computer Vision system for automated inventory management and
+                  SKU detection
+                </p>
+
+                <div class="mb-4">
+                  <div class="flex justify-between text-xs text-gray-500 mb-1">
+                    <span>Progress</span>
+                    <span>60%</span>
+                  </div>
+                  <div
+                    class="w-full h-2 bg-gray-800 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-orange-600 to-orange-400"
+                      style="width: 60%"
+                    ></div>
+                  </div>
+                </div>
+
+                <button
+                  onclick="viewProject('smart-inventory')"
+                  class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded text-sm font-semibold transition-colors"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: AI Learning Assistant -->
+          <div class="project-card w-80">
+            <div
+              class="bg-[#1a1a1a] rounded-xl overflow-hidden border border-[#333] h-full hover:border-[#444] transition-colors"
+            >
+              <div
+                class="relative h-48 bg-gradient-to-br from-blue-900/40 to-blue-600/20"
+              >
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-brain text-blue-500 opacity-50"
+                  >
+                    <path
+                      d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"
+                    />
+                    <path
+                      d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"
+                    />
+                  </svg>
+                </div>
+                <div class="absolute bottom-4 left-4">
+                  <span
+                    class="bg-gradient-to-r from-[#9333ea] to-[#4f46e5] text-white px-3 py-1 rounded-full text-xs font-semibold"
+                    >Planning</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span
+                    class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-xs"
+                    >GPT-4</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-xs"
+                    >React</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-xs"
+                    >FastAPI</span
+                  >
+                </div>
+                <h3 class="text-xl font-bold mb-2">AI Learning Assistant</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                  Personalized AI tutor that adapts to learning styles and
+                  progress
+                </p>
+
+                <div class="mb-4">
+                  <div class="flex justify-between text-xs text-gray-500 mb-1">
+                    <span>Progress</span>
+                    <span>25%</span>
+                  </div>
+                  <div
+                    class="w-full h-2 bg-gray-800 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-blue-600 to-blue-400"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+
+                <button
+                  onclick="viewProject('ai-learning')"
+                  class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded text-sm font-semibold transition-colors"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="px-6 md:px-12 mt-20">
+      <div class="mb-8">
+        <h2 class="section-title text-2xl font-bold">Tech Stack & Expertise</h2>
+        <p class="text-gray-400 ml-6">
+          Technologies I work with and my expertise levels
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Programming Languages -->
+        <div
+          class="tech-stack-card rounded-xl p-6 skill-category hover:shadow-lg md:col-span-2"
+        >
+          <div class="category-icon mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-code"
+            >
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-3">Data Concepts</h3>
+          <div class="space-y-2">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Data cleaning</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Feature engineering</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Exploratory data analysis (EDA)</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Machine learning models</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Large language models (LLM)</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Automation pipelines</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Extract, Transform, Load (ETL)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Database Management -->
+        <div
+          class="tech-stack-card rounded-xl p-6 skill-category hover:shadow-lg"
+        >
+          <div class="category-icon mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"  
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-database"
+            >
+              <ellipse cx="12" cy="5" rx="9" ry="3" />
+              <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+              <path d="M3 12A9 3 0 0 0 21 12" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-3">Database Management</h3>
+          <div class="space-y-2">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">SQL</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">MySQL</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Concepts -->
+        <div
+          class="tech-stack-card rounded-xl p-6 skill-category hover:shadow-lg"
+        >
+          <div class="category-icon mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-bar-chart-3"
+            >
+              <path d="M3 3v18h18" />
+              <path d="M18 17V9" />
+              <path d="M13 17V5" />
+              <path d="M8 17v-3" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-3">Programming Languages</h3>
+          <div class="space-y-2">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Python</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">C++</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frameworks and Tools -->
+        <div
+          class="tech-stack-card rounded-xl p-6 skill-category hover:shadow-lg md:col-span-2"
+        >
+          <div class="category-icon mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-tool"
+            >
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-3">Frameworks and Tools</h3>
+          <div class="space-y-2">
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Microsoft Azure</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">PyTorch</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">TensorFlow</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">OpenCV</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">YOLO</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">FastAPI</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Flask</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Streamlit</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">Git</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">GitHub</span>
+              <span class="px-3 py-1 bg-[#333] rounded-full text-sm">n8n</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <!-- Recently Viewed Section -->
+    <section id="recent" class="px-6 md:px-12 mt-20">
+      <div class="mb-8 flex justify-between items-center">
+        <div>
+          <h2 class="section-title text-2xl font-bold">Recently Viewed</h2>
+          <p class="text-gray-400 ml-6">Projects you've recently explored</p>
+        </div>
+        <button
+          onclick="clearRecent()"
+          class="text-gray-400 hover:text-white text-sm transition-colors"
+        >
+          Clear History
+        </button>
+      </div>
+
+      <div id="recentProjects" class="scroll-wrapper relative">
+        <div class="scroll-container">
+          <!-- Recent projects will be dynamically added here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommended For You Section -->
+    <section id="recommended" class="px-6 md:px-12 mt-12">
+      <div class="mb-8 flex justify-between items-center">
+        <div>
+          <h2 class="section-title text-2xl font-bold">Recommended For You</h2>
+          <p class="text-gray-400 ml-6">
+            Based on your interests in AI/ML and Full Stack Development
+          </p>
+        </div>
+        <div class="flex space-x-2">
+          <button
+            onclick="scrollRecommended(-1)"
+            class="scroll-arrow left-arrow"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-left"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            onclick="scrollRecommended(1)"
+            class="scroll-arrow right-arrow"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-right"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="scroll-wrapper relative">
+        <div id="recommendedScroll" class="scroll-container">
+          <!-- AI Course Generator -->
+          <div
+            class="project-card w-80"
+            onclick="viewProject('ai-course-generator')"
+          >
+            <div
+              class="recent-card rounded-xl overflow-hidden h-full hover:border-[#444] transition-colors"
+            >
+              <div class="relative h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2670&auto=format&fit=crop"
+                  alt="AI Course Generator"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+                ></div>
+                <div class="absolute top-4 right-4">
+                  <span
+                    class="bg-gradient-to-r from-[#9333ea] to-[#4f46e5] text-white px-2 py-1 rounded text-xs font-semibold"
+                    >New</span
+                  >
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex flex-wrap gap-1 mb-2">
+                  <span
+                    class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded text-xs"
+                    >Next.js</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded text-xs"
+                    >Gemini API</span
+                  >
+                </div>
+                <h3 class="text-lg font-bold mb-2">🎓 AI Course Generator</h3>
+                <p class="text-gray-400 text-sm mb-3">
+                  Automated course creation platform with AI-powered content
+                  generation
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-gray-500">Full Stack Project</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-up-right"
+                  >
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fashion Recommendation System -->
+          <div
+            class="project-card w-80"
+            onclick="viewProject('fashion-recsys')"
+          >
+            <div
+              class="recent-card rounded-xl overflow-hidden h-full hover:border-[#444] transition-colors"
+            >
+              <div class="relative h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2574&auto=format&fit=crop"
+                  alt="Fashion Recommendation System"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+                ></div>
+              </div>
+              <div class="p-4">
+                <div class="flex flex-wrap gap-1 mb-2">
+                  <span
+                    class="px-2 py-1 bg-rose-900/50 text-rose-300 rounded text-xs"
+                    >ResNet50</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-rose-900/50 text-rose-300 rounded text-xs"
+                    >OpenCV</span
+                  >
+                </div>
+                <h3 class="text-lg font-bold mb-2">
+                  Fashion Recommendation System
+                </h3>
+                <p class="text-gray-400 text-sm mb-3">
+                  Visual similarity search for e-commerce using deep learning
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-gray-500">Computer Vision</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-up-right"
+                  >
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AdmitGenie -->
+          <div class="project-card w-80" onclick="viewProject('admitgenie')">
+            <div
+              class="recent-card rounded-xl overflow-hidden h-full hover:border-[#444] transition-colors"
+            >
+              <div class="relative h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=2560&q=80"
+                  alt="AdmitGenie Automation"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+                ></div>
+              </div>
+              <div class="p-4">
+                <div class="flex flex-wrap gap-1 mb-2">
+                  <span
+                    class="px-2 py-1 bg-green-900/50 text-green-300 rounded text-xs"
+                    >n8n</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-green-900/50 text-green-300 rounded text-xs"
+                    >REST APIs</span
+                  >
+                </div>
+                <h3 class="text-lg font-bold mb-2">AdmitGenie Automation</h3>
+                <p class="text-gray-400 text-sm mb-3">
+                  Multi-channel AI chatbots and workflow automation platform
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-gray-500">Automation</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-up-right"
+                  >
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SoulScript: AI Life Companion -->
+          <div class="project-card w-80" onclick="viewProject('soulscript')">
+            <div
+              class="recent-card rounded-xl overflow-hidden h-full hover:border-[#444] transition-colors"
+            >
+              <div class="relative h-48">
+                <img
+                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2670&auto=format&fit=crop"
+                  alt="SoulScript: AI Life Companion"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+                ></div>
+                <div class="absolute top-4 right-4">
+                  <span
+                    class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-2 py-1 rounded text-xs font-semibold"
+                    >New</span
+                  >
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex flex-wrap gap-1 mb-2">
+                  <span
+                    class="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs"
+                    >NLP</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs"
+                    >LLMs</span
+                  >
+                </div>
+                <h3 class="text-lg font-bold mb-2">SoulScript : AI Life Companion</h3>
+                <p class="text-gray-400 text-sm mb-3">
+                  AI-powered reflective journaling and life companion platform
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-gray-500">AI/ML Project</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-up-right"
+                  >
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-gradient mt-20 pt-12 pb-8 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <!-- Brand & About -->
+          <div>
+            <div class="flex items-center space-x-2 mb-4">
+              <div class="h-8 w-2 bg-[#9333ea] rounded-full"></div>
+              <div class="h-8 w-2 bg-[#9333ea] rounded-full opacity-60"></div>
+              <div class="h-8 w-2 bg-[#9333ea] rounded-full opacity-40"></div>
+              <span class="ml-2 text-xl font-bold">ANVESHA</span>
+            </div>
+            <p class="text-gray-400 text-sm mb-6">
+              AI/ML Engineer & Full Stack Developer passionate about building
+              intelligent systems and scalable applications.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="https://linkedin.com/in/anvesha-rohatgi"
+                target="_blank"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-linkedin"
+                >
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  />
+                  <rect width="4" height="12" x="2" y="9" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </a>
+              <a
+                href="https://github.com/Anvesha137"
+                target="_blank"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-github"
+                >
+                  <path
+                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                  />
+                  <path d="M9 18c-4.51 2-5-2-7-2" />
+                </svg>
+              </a>
+              <a
+                href="mailto:annierohatgi13@gmail.com"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-mail"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#home"
+                  class="footer-link text-gray-400 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#ongoing"
+                  class="footer-link text-gray-400 hover:text-white transition-colors"
+                  >Ongoing Projects</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#tech-stack"
+                  class="footer-link text-gray-400 hover:text-white transition-colors"
+                  >Tech Stack</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#recent"
+                  class="footer-link text-gray-400 hover:text-white transition-colors"
+                  >Recently Viewed</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#recommended"
+                  class="footer-link text-gray-400 hover:text-white transition-colors"
+                  >Recommended</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Technologies -->
+          <div>
+            <h3 class="text-lg font-bold mb-6">Technologies</h3>
+            <ul class="space-y-3">
+              <li><span class="text-gray-400">Python & PyTorch</span></li>
+              <li><span class="text-gray-400">Next.js & React</span></li>
+              <li><span class="text-gray-400">TensorFlow & OpenCV</span></li>
+              <li><span class="text-gray-400">PostgreSQL & Docker</span></li>
+              <li><span class="text-gray-400">Azure ML & Vercel</span></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-lg font-bold mb-6">Get In Touch</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-mail mr-3"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                annierohatgi13@gmail.com
+              </li>
+              <li class="flex items-center text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-map-pin mr-3"
+                >
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                  />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Indore, Madhya Pradesh
+              </li>
+              <li class="flex items-center text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-graduation-cap mr-3"
+                >
+                  <path
+                    d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
+                  />
+                  <path d="M22 10v6" />
+                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+                </svg>
+                B.Tech CSE (AI/ML) - CGPA: 8.5
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-8 border-t border-[#333]">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="text-gray-500 text-sm mb-4 md:mb-0">
+              © 2025 Anvesha Rohatgi. All rights reserved.
+            </div>
+            <div class="flex items-center space-x-6">
+              <button
+                onclick="openAboutModal()"
+                class="text-sm text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-user mr-2"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                Read My Story
+              </button>
+              <span class="text-gray-600">|</span>
+              <a
+                href="https://calendar.app.google/J3CBnvMSPVjoDnNR8"
+                target="_blank"
+                class="text-sm text-purple-400 hover:text-purple-300 transition-colors flex items-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-calendar mr-2"
+                >
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M3 10h18" />
+                </svg>
+                Book a Call
+              </a>
+              <span class="text-gray-600">|</span>
+              <span class="text-sm text-gray-500"
+                >Looking forward for Collaboration </span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+      <div
+        class="bg-[#1a1a1a] rounded-xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+      >
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-6">
+            <h2 id="modalTitle" class="text-2xl font-bold"></h2>
+            <button
+              onclick="closeModal()"
+              class="text-gray-400 hover:text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-x"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </div>
+          <div id="modalContent" class="text-gray-300">
+            <!-- Content will be dynamically loaded -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Project data
+      const projects = {
+        "ai-course-generator": {
+          title: "🎓 AI Course Generator",
+          description:
+            "Automate & personalize your course creation workflow with the power of AI. Generate comprehensive online course outlines instantly for educators, content creators, and e-learning startups.",
+          features: [
+            "AI-Powered Generation: Automatically create course outlines, learning objectives, and module breakdowns",
+            "Customizable Difficulty: Choose topic and level (Beginner/Intermediate/Advanced) with full personalization",
+            "Full Tech Stack: Next.js, Tailwind, Drizzle ORM, Clerk authentication, PostgreSQL, and TypeScript",
+            "Export & Integration: Copy to clipboard or integrate directly into Learning Management Systems",
+          ],
+          technologies: [
+            "Next.js",
+            "Gemini API",
+            "TypeScript",
+            "Clerk",
+            "Drizzle ORM",
+            "PostgreSQL",
+          ],
+          liveDemo: "https://know-val.vercel.app/",
+          github: "https://github.com/Anvesha137/ai-course-generator",
+        },
+        "fashion-recsys": {
+          title: "Fashion Recommendation System",
+          description:
+            "Visual similarity search system for fashion e-commerce using deep learning and computer vision.",
+          features: [
+            "Created ResNet50-based recommendation model with OpenCV and KNN for visual similarity search",
+            "Implemented efficient inference pipelines for scalable deployment in e-commerce applications",
+            "Built Flask API for real-time recommendations with <200ms response time",
+            "Achieved 94% accuracy in visual similarity matching",
+          ],
+          technologies: ["ResNet50", "OpenCV", "KNN", "Flask", "Python"],
+          github: "https://github.com/Anvesha137/fashion-recommendation-system",
+        },
+        admitgenie: {
+          title: "AdmitGenie Automation Platform",
+          description:
+            "AI automation platform with multi-channel chatbots and workflow automation for admission processes.",
+          features: [
+            "Developed multi-channel AI chatbots with n8n and REST APIs for workflow automation",
+            "Reduced manual intervention and enabled scalable backend integration",
+            "Scalable system handling 1000+ concurrent users",
+            "Reduced response time from 24 hours to 5 minutes",
+          ],
+          technologies: ["n8n", "REST APIs", "Python", "PostgreSQL"],
+          github: "https://github.com/Anvesha137/admitgenie-automation",
+        },
+        "smart-sales": {
+          title: "Smart Sales Insights Dashboard",
+          description:
+            "AI-powered sales analytics platform integrating data cleaning, preprocessing, feature engineering, ML forecasting and anomaly detection.",
+          features: [
+            "Developed LLM-based agent to generate automated weekly sales insights",
+            "Integrated forecasting models with XGBoost for accurate sales predictions",
+            "Built interactive Streamlit dashboard with real-time analytics and visualizations",
+            "Achieved 92% accuracy in sales forecasting with automated anomaly detection",
+          ],
+          technologies: [
+            "Python",
+            "XGBoost",
+            "Streamlit",
+            "Scikit-learn",
+            "Plotly",
+          ],
+          github: "https://github.com/Anvesha137/smart-sales-insights",
+        },
+        "smart-inventory": {
+          title: "Smart Inventory Auditor",
+          description:
+            "Computer Vision system using YOLOv8 for automated inventory management and SKU detection.",
+          features: [
+            "Real-time SKU detection and counting with YOLOv8 object detection",
+            "Automated inventory tracking with accuracy up to 98%",
+            "Integration with warehouse management systems via REST APIs",
+            "Real-time alerts for low stock and inventory discrepancies",
+          ],
+          technologies: ["YOLOv8", "OpenCV", "Streamlit", "FastAPI", "Python"],
+          github: "https://github.com/Anvesha137/smart-inventory-auditor",
+        },
+        "ai-learning": {
+          title: "AI Learning Assistant",
+          description:
+            "Personalized AI tutor that adapts to individual learning styles and progress.",
+          features: [
+            "Adaptive learning paths based on user performance and preferences",
+            "Real-time feedback and progress tracking with detailed analytics",
+            "Integration with multiple learning resources and content platforms",
+            "Personalized recommendations for learning materials and exercises",
+          ],
+          technologies: [
+            "GPT-4",
+            "React",
+            "FastAPI",
+            "PostgreSQL",
+            "Tailwind CSS",
+          ],
+          status: "In Planning",
+        },
+        "weather-prediction": {
+          title: "Weather Prediction System",
+          description:
+            "Deep learning model for accurate weather forecasting using LSTM networks and time series analysis.",
+          features: [
+            "LSTM-based weather forecasting model with 24-hour predictions",
+            "Integration with multiple weather data sources and APIs",
+            "Real-time monitoring dashboard with historical data analysis",
+            "Alert system for extreme weather conditions",
+          ],
+          technologies: ["LSTM", "TensorFlow", "Python", "Flask", "Plotly"],
+          github: "https://github.com/Anvesha137/weather-prediction-system",
+        },
+        soulscript: {
+          title: "SoulScript : AI Life Companion",
+          description:
+            "AI-powered reflective journaling and life companion platform that helps users process thoughts, recognize emotional patterns, and receive context-aware guidance grounded in philosophical and spiritual texts.",
+          features: [
+            "Built an AI journaling system that distinguishes venting from advice-seeking using intent detection",
+            "Integrated contextual explanations from ancient texts with modern language and relevance",
+            "Implemented pattern recognition to identify recurring emotional and behavioral themes over time",
+            "Designed a non-intrusive guidance system avoiding prescriptive or preachy responses",
+            "Planned extensions including voice journaling, anonymous community insights, and anti-productivity modes",
+          ],
+          technologies: [
+            "Python",
+            "NLP (LLMs, intent classification, embeddings)",
+            "REST APIs",
+            "PostgreSQL",
+            "Workflow automation and pattern analysis pipelines",
+          ],
+        },
+      };
+
+      // About modal functions
+      function openAboutModal() {
+        document.getElementById("aboutModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeAboutModal() {
+        document.getElementById("aboutModal").classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Scroll functionality
+      function scrollOngoing(direction) {
+        const container = document.getElementById("ongoingScroll");
+        container.scrollBy({ left: direction * 300, behavior: "smooth" });
+      }
+
+      function scrollRecommended(direction) {
+        const container = document.getElementById("recommendedScroll");
+        container.scrollBy({ left: direction * 300, behavior: "smooth" });
+      }
+
+      // Modal functionality
+      function viewProject(projectId) {
+        const project = projects[projectId];
+        if (!project) return;
+
+        // Add to recently viewed
+        addToRecent(projectId, project.title);
+
+        // Update modal content
+        document.getElementById("modalTitle").textContent = project.title;
+
+        const content = `
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Description</h3>
+                        <p>${project.description}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Key Features</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            ${project.features
+                              .map((feature) => `<li>${feature}</li>`)
+                              .join("")}
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Technologies Used</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.technologies
+                              .map(
+                                (tech) =>
+                                  `<span class="px-3 py-1 bg-[#333] rounded-full text-sm">${tech}</span>`
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                    
+                    ${
+                      project.status
+                        ? `
+                    <div class="p-4 bg-yellow-900/20 border border-yellow-800 rounded-lg">
+                        <p class="text-yellow-300"><strong>Status:</strong> ${project.status}</p>
+                    </div>
+                    `
+                        : ""
+                    }
+                    
+                    <div class="flex space-x-4 pt-6 border-t border-[#333]">
+                        ${
+                          project.liveDemo
+                            ? `
+                        <a href="${project.liveDemo}" target="_blank" 
+                           class="flex-1 bg-gradient-to-r from-[#9333ea] to-[#4f46e5] text-white py-3 rounded-lg font-semibold text-center transition-all hover:opacity-90">
+                            Live Demo
+                        </a>
+                        `
+                            : ""
+                        }
+                        
+                        ${
+                          project.github
+                            ? `
+                        <a href="${project.github}" target="_blank" 
+                           class="flex-1 bg-[#333] text-white py-3 rounded-lg font-semibold text-center transition-all hover:bg-[#444]">
+                            View on GitHub
+                        </a>
+                        `
+                            : ""
+                        }
+                    </div>
+                </div>
+            `;
+
+        document.getElementById("modalContent").innerHTML = content;
+        document.getElementById("projectModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("projectModal").classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Recently viewed functionality
+      function addToRecent(projectId, title) {
+        let recent = JSON.parse(localStorage.getItem("recentProjects") || "[]");
+
+        // Remove if already exists
+        recent = recent.filter((p) => p.id !== projectId);
+
+        // Add to beginning
+        recent.unshift({ id: projectId, title: title, timestamp: Date.now() });
+
+        // Keep only last 5
+        recent = recent.slice(0, 5);
+
+        localStorage.setItem("recentProjects", JSON.stringify(recent));
+        renderRecentProjects();
+      }
+
+      function renderRecentProjects() {
+        const container = document.querySelector(
+          "#recentProjects .scroll-container"
+        );
+        const recent = JSON.parse(
+          localStorage.getItem("recentProjects") || "[]"
+        );
+
+        if (recent.length === 0) {
+          container.innerHTML = `
+                    <div class="w-full text-center py-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history text-gray-600 mx-auto mb-4"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+                        <p class="text-gray-400">No recently viewed projects yet</p>
+                        <p class="text-sm text-gray-600 mt-2">Click on projects to add them here</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = recent
+          .map((item) => {
+            const project = projects[item.id];
+            const colors = [
+              "from-purple-900/40",
+              "from-blue-900/40",
+              "from-green-900/40",
+              "from-pink-900/40",
+              "from-orange-900/40",
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            return `
+                    <div class="project-card w-64" onclick="viewProject('${
+                      item.id
+                    }')">
+                        <div class="recent-card rounded-xl overflow-hidden h-full hover:border-[#444] transition-colors">
+                            <div class="relative h-32 bg-gradient-to-br ${color} to-gray-900/20">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock opacity-50"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </div>
+                                <div class="absolute bottom-2 right-2">
+                                    <span class="text-xs text-gray-400">${formatTime(
+                                      item.timestamp
+                                    )}</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold mb-2 truncate">${
+                                  item.title
+                                }</h3>
+                                ${
+                                  project
+                                    ? `
+                                    <p class="text-gray-400 text-xs mb-3 line-clamp-2">${project.description.substring(
+                                      0,
+                                      80
+                                    )}...</p>
+                                    <div class="flex flex-wrap gap-1">
+                                        ${project.technologies
+                                          .slice(0, 2)
+                                          .map(
+                                            (tech) =>
+                                              `<span class="px-2 py-0.5 bg-[#333] text-gray-300 rounded text-xs">${tech}</span>`
+                                          )
+                                          .join("")}
+                                    </div>
+                                `
+                                    : ""
+                                }
+                            </div>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function formatTime(timestamp) {
+        const now = Date.now();
+        const diff = now - timestamp;
+        const minutes = Math.floor(diff / 60000);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+
+        if (minutes < 60) return `${minutes}m ago`;
+        if (hours < 24) return `${hours}h ago`;
+        return `${days}d ago`;
+      }
+
+      function clearRecent() {
+        localStorage.removeItem("recentProjects");
+        renderRecentProjects();
+      }
+
+      // Resume download
+      function downloadResume() {
+        alert(
+          "Resume download will be available soon! In the meantime, please contact me via email."
+        );
+      }
+
+      // Navigation
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Back to top button
+      window.addEventListener("scroll", () => {
+        const backToTop = document.getElementById("backToTop");
+        if (window.scrollY > 300) {
+          backToTop.classList.add("visible");
+        } else {
+          backToTop.classList.remove("visible");
+        }
+      });
+
+      document
+        .getElementById("backToTop")
+        .addEventListener("click", scrollToTop);
+
+      // Close modal on ESC
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+          closeAboutModal();
+        }
+      });
+
+      // Close modal on outside click
+      document.getElementById("projectModal").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("projectModal")) {
+          closeModal();
+        }
+      });
+
+      document.getElementById("aboutModal").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("aboutModal")) {
+          closeAboutModal();
+        }
+      });
+
+      // Initialize recently viewed
+      document.addEventListener("DOMContentLoaded", () => {
+        renderRecentProjects();
+
+        // Initialize Lucide icons
+        if (typeof lucide !== "undefined") {
+          lucide.createIcons();
+        }
+      });
+    </script>
+  </body>
+</html>
