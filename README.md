@@ -1,4 +1,4 @@
-# Anvesha Rohatgi’s Digital Dojo 🥋
+# Anvesha Rohatgi
 
 This repository is where ideas get tested, broken, rebuilt, and shipped.  
 Not a highlight reel. A working lab.
@@ -74,6 +74,10 @@ It’s about showing I can figure things out, adapt fast, and ship responsibly.
 I’d rather build something imperfect and useful than something elegant and irrelevant.
 
 — Anvesha Rohatgi  
-Proof that this isn’t just text
-**Enter the dojo →** anvesha-portfolio.vercel.app
+
+
+## 🚀 Live Demo: Proof that this isn’t just text
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://anvesha-portfolio.vercel.app/)
+
 
