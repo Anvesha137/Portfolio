@@ -31,6 +31,9 @@ Each one represents a different way of thinking: experimentation, iteration, or 
 Some are complete.  
 Some are still cooking.  
 That’s intentional.
+## 🚀 Live Demo: Proof that this isn’t just text
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-anvesha.vercel.app/)
 
 ---
 
@@ -74,10 +77,5 @@ It’s about showing I can figure things out, adapt fast, and ship responsibly.
 I’d rather build something imperfect and useful than something elegant and irrelevant.
 
 — Anvesha Rohatgi  
-
-
-## 🚀 Live Demo: Proof that this isn’t just text
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-anvesha.vercel.app/)
 
 
