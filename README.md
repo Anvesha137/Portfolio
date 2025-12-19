@@ -1,4 +1,6 @@
 # Anvesha Rohatgi
+## 🚀 Live Demo: Proof that this isn’t just text
+[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-anvesha.vercel.app/)
 
 This repository is where ideas get tested, broken, rebuilt, and shipped.  
 Not a highlight reel. A working lab.
@@ -31,9 +33,6 @@ Each one represents a different way of thinking: experimentation, iteration, or 
 Some are complete.  
 Some are still cooking.  
 That’s intentional.
-## 🚀 Live Demo: Proof that this isn’t just text
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-anvesha.vercel.app/)
 
 ---
 
