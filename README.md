@@ -78,6 +78,6 @@ I’d rather build something imperfect and useful than something elegant and irr
 
 ## 🚀 Live Demo: Proof that this isn’t just text
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://anvesha-portfolio.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-CodeCanvas-9333ea?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-anvesha.vercel.app/)
 
 
